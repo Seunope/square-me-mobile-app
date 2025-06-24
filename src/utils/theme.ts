@@ -10,10 +10,13 @@ export const colors = {
     100: "#0D2008",
   },
 
+  //   gray: {
+  //     100: "#808080",
+  //   },
+
   gray: {
-    100: "#808080",
-    90: "#D2D6E2",
-    80: "#E0E0E0",
+    100: "#4C525E",
+    90: "#DEDEDE",
   },
 
   blue: {
@@ -27,18 +30,18 @@ export const colors = {
   },
   green: {
     100: "#347822",
-    90: "#38cb89",
-    80: "#D6E4D3",
-    70: "#EBF1E9",
-    60: "rgba(235, 241, 233, 0.5)",
-    50: "#F5F8F4",
+    // 90: "#38cb89",
+    // 80: "#D6E4D3",
+    // 70: "#EBF1E9",
+    // 60: "rgba(235, 241, 233, 0.5)",
+    // 50: "#F5F8F4",
   },
 
   red: {
     100: "#FF3C10",
-    90: "#F3ABA7",
-    80: "#C65652",
-    70: "#FF6A55",
+    // 90: "#F3ABA7",
+    // 80: "#C65652",
+    // 70: "#FF6A55",
   },
 };
 
@@ -61,5 +64,5 @@ export const fonts = {
   light: "ClashGrotesk-Light",
   medium: "ClashGrotesk-Medium",
   regular: "ClashGrotesk-Regular",
-  semiBold: "ClashGrotesk-SemiBold",
+  semiBold: "ClashGrotesk-Semibold",
 };

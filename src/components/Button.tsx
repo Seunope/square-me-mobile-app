@@ -50,8 +50,7 @@ const Button: React.FC<Props> = ({
           // marginTop: marginTop,
           backgroundColor: colors.white[100],
           borderWidth: 1,
-          borderColor:
-            variant == "warning" ? colors.red[100] : colors.green[100],
+          borderColor: variant == "warning" ? colors.red[100] : colors.blue[90],
         },
       ]}
       onPress={onPress}
@@ -59,7 +58,7 @@ const Button: React.FC<Props> = ({
       <Text
         style={[
           styles.text,
-          { color: variant == "warning" ? colors.red[100] : colors.green[100] },
+          { color: variant == "warning" ? colors.red[100] : colors.blue[100] },
         ]}
       >
         {btnTxt}
@@ -72,7 +71,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: sizes.md,
+    marginTop: sizes.xs,
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: sizes.md,
@@ -87,6 +86,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     // fontWeight: "bold",
     color: colors.white[100],
-    fontFamily: fonts.bold,
+    fontFamily: fonts.regular,
   },
 });

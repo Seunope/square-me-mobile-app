@@ -9,33 +9,9 @@ import {
   StatusBar,
 } from "react-native";
 import Button from "../components/Button";
+import { fonts, colors, sizes } from "../utils/theme";
 
 const { width: screenWidth } = Dimensions.get("window");
-
-// Reusable Button Components
-const PrimaryButton = ({ onPress, children, style, textStyle }) => {
-  return (
-    <TouchableOpacity
-      style={[styles.primaryButton, style]}
-      onPress={onPress}
-      activeOpacity={0.8}
-    >
-      <Text style={[styles.primaryButtonText, textStyle]}>{children}</Text>
-    </TouchableOpacity>
-  );
-};
-
-const SecondaryButton = ({ onPress, children, style, textStyle }) => {
-  return (
-    <TouchableOpacity
-      style={[styles.secondaryButton, style]}
-      onPress={onPress}
-      activeOpacity={0.8}
-    >
-      <Text style={[styles.secondaryButtonText, textStyle]}>{children}</Text>
-    </TouchableOpacity>
-  );
-};
 
 // Page Indicator Component
 const PageIndicator = ({ currentPage, totalPages }) => {
@@ -298,7 +274,11 @@ const OnboardingSlider = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
 
       {/* Background with solid color instead of gradient */}
       <View
@@ -339,18 +319,15 @@ const OnboardingSlider = () => {
         </View>
 
         <View style={styles.buttonSection}>
-          <PrimaryButton onPress={() => console.log("Create account")}>
-            Create an account
-          </PrimaryButton>
           <Button
             btnTxt="Create an account"
             onPress={() => console.log("Create account")}
           ></Button>
-          <SecondaryButton
+          <Button
+            outline={true}
+            btnTxt=" I already have an account"
             onPress={() => console.log("I already have an account")}
-          >
-            I already have an account
-          </SecondaryButton>
+          ></Button>
         </View>
       </View>
     </View>
@@ -731,15 +708,15 @@ const styles = StyleSheet.create({
   },
   indicator: {
     width: 32,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 4,
+    height: sizes["2xs"],
+    borderRadius: sizes.sm,
+    marginHorizontal: sizes["2xs"],
   },
   activeIndicator: {
-    backgroundColor: "#1E40AF",
+    backgroundColor: colors.blue[90],
   },
   inactiveIndicator: {
-    backgroundColor: "#D1D5DB",
+    backgroundColor: colors.gray[90],
   },
   textSection: {
     alignItems: "center",
@@ -747,43 +724,20 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#000000",
+    fontFamily: fonts.semiBold,
+    color: colors.blue[90],
     textAlign: "center",
     marginBottom: 16,
   },
   subtitle: {
     fontSize: 16,
-    color: "#6B7280",
+    color: colors.gray[100],
+    fontFamily: fonts.regular,
+
     textAlign: "center",
   },
   buttonSection: {
     gap: 12,
-  },
-
-  // Button Styles
-  primaryButton: {
-    backgroundColor: "#1E40AF",
-    borderRadius: 12,
-    paddingVertical: 16,
-    alignItems: "center",
-  },
-  primaryButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  secondaryButton: {
-    borderWidth: 1,
-    borderColor: "#1E40AF",
-    borderRadius: 12,
-    paddingVertical: 16,
-    alignItems: "center",
-  },
-  secondaryButtonText: {
-    color: "#1E40AF",
-    fontSize: 16,
-    fontWeight: "600",
   },
 });
 
