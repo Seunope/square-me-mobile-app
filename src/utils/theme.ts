@@ -17,11 +17,16 @@ export const colors = {
   gray: {
     100: "#4C525E",
     90: "#DEDEDE",
+    80: "#F3F4F7",
   },
 
   blue: {
     100: "#000A4A",
     90: "#120542",
+  },
+
+  purple: {
+    100: "#9F56D4",
   },
 
   yellow: {

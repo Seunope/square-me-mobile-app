@@ -24,6 +24,10 @@
     {
       "path": "src/assets/fonts/ClashGrotesk-Semibold.otf",
       "sha1": "d43b8e6d6ac119d9806f16ad7d62bf93caba82d5"
+    },
+    {
+      "path": "node_modules/react-native-international-phone-number/lib/assets/fonts/TwemojiMozilla.woff2",
+      "sha1": "3a2bb214a3ba69716cbc6a3177480aefb6b867e4"
     }
   ]
 }

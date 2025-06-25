@@ -17,6 +17,7 @@
 		6AB7C3C225F243E486BEA01E /* ClashGrotesk-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E5B2A9110FF3406DB5B60038 /* ClashGrotesk-Medium.otf */; };
 		5650B61963FE4B9DB48671DE /* ClashGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E08F012F5FE44A7A7DDB96E /* ClashGrotesk-Regular.otf */; };
 		013FF3BB7D824C76B71121F3 /* ClashGrotesk-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 54B26A7DEDBD41198606476C /* ClashGrotesk-Semibold.otf */; };
+		CFD20CBABE94406CB0F73046 /* TwemojiMozilla.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 8B0FD59F401D45248734EC9A /* TwemojiMozilla.woff2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E5B2A9110FF3406DB5B60038 /* ClashGrotesk-Medium.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Medium.otf"; path = "../src/assets/fonts/ClashGrotesk-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		0E08F012F5FE44A7A7DDB96E /* ClashGrotesk-Regular.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Regular.otf"; path = "../src/assets/fonts/ClashGrotesk-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		54B26A7DEDBD41198606476C /* ClashGrotesk-Semibold.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Semibold.otf"; path = "../src/assets/fonts/ClashGrotesk-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8B0FD59F401D45248734EC9A /* TwemojiMozilla.woff2 */ = {isa = PBXFileReference; name = "TwemojiMozilla.woff2"; path = "../node_modules/react-native-international-phone-number/lib/assets/fonts/TwemojiMozilla.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				E5B2A9110FF3406DB5B60038 /* ClashGrotesk-Medium.otf */,
 				0E08F012F5FE44A7A7DDB96E /* ClashGrotesk-Regular.otf */,
 				54B26A7DEDBD41198606476C /* ClashGrotesk-Semibold.otf */,
+				8B0FD59F401D45248734EC9A /* TwemojiMozilla.woff2 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				6AB7C3C225F243E486BEA01E /* ClashGrotesk-Medium.otf in Resources */,
 				5650B61963FE4B9DB48671DE /* ClashGrotesk-Regular.otf in Resources */,
 				013FF3BB7D824C76B71121F3 /* ClashGrotesk-Semibold.otf in Resources */,
+				CFD20CBABE94406CB0F73046 /* TwemojiMozilla.woff2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

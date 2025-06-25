@@ -1,17 +1,17 @@
-import AppStorage from '../services/AppStorage';
-import {format, subDays, formatDistance, differenceInDays} from 'date-fns';
+import AppStorage from "./services/AppStorage";
+import { format, subDays, formatDistance, differenceInDays } from "date-fns";
 export default class Utility {
   constructor() {}
 
   static normalizePhoneNumber = (phoneNumber: string) => {
-    const phone = phoneNumber.replace(/ /g, '');
+    const phone = phoneNumber.replace(/ /g, "");
     let newVal = phone;
-    if (phone?.includes('+234')) {
-      const temp = phone?.split('+234');
+    if (phone?.includes("+234")) {
+      const temp = phone?.split("+234");
       newVal = `0${temp[1]}`;
     }
-    if (phone?.includes('234')) {
-      const temp = phone?.split('234');
+    if (phone?.includes("234")) {
+      const temp = phone?.split("234");
       newVal = `0${temp[1]}`;
     }
     return newVal;
@@ -28,23 +28,23 @@ export default class Utility {
     withDecimal: boolean = true,
     decimalPlace: number = 2,
     hide: boolean = false,
-    hideSymbol = false,
+    hideSymbol = false
   ) => {
     if (isNaN(num)) {
-      return '____';
+      return "____";
     }
     if (hide) {
-      return '--,---';
+      return "--,---";
     }
 
     let newValue = null;
     if (withDecimal) {
-      newValue = num.toLocaleString('en-US', {
+      newValue = num.toLocaleString("en-US", {
         minimumFractionDigits: decimalPlace,
         maximumFractionDigits: decimalPlace,
       });
     } else {
-      newValue = num.toLocaleString('en-US');
+      newValue = num.toLocaleString("en-US");
     }
 
     if (hideSymbol) {
@@ -55,13 +55,13 @@ export default class Utility {
 
   static inputWithComma(value: any) {
     if (!value) {
-      return '0';
+      return "0";
     }
-    var number = value.replace(/,/g, '');
+    var number = value.replace(/,/g, "");
     if (isNaN(number)) {
-      return 'NaN';
+      return "NaN";
     }
-    let formattedNumber = Number(number).toLocaleString('en-GB');
+    let formattedNumber = Number(number).toLocaleString("en-GB");
     return formattedNumber;
   }
 
@@ -87,9 +87,9 @@ export default class Utility {
   // }
 
   static formatDaysAgo(dateTime: string) {
-    formatDistance(subDays(new Date(), 3), new Date(), {addSuffix: true});
-    let k = differenceInDays(new Date(), new Date('2020-07-12T15:59:31.357Z'));
-    console.log('Days', k);
+    formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true });
+    let k = differenceInDays(new Date(), new Date("2020-07-12T15:59:31.357Z"));
+    console.log("Days", k);
     return k;
   }
 
@@ -98,9 +98,9 @@ export default class Utility {
       if (type === 1) {
         return format(new Date(dateTime), "d MMM y hh:mm:aaaaa'm'");
       } else if (type === 2) {
-        return format(new Date(dateTime), 'd MMM y');
+        return format(new Date(dateTime), "d MMM y");
       } else {
-        return format(new Date(dateTime), 'd/MM/y');
+        return format(new Date(dateTime), "d/MM/y");
       }
     }
 
@@ -108,68 +108,68 @@ export default class Utility {
   }
 
   static replaceText(myString: string) {
-    const arr = myString.split(''); // myString.length;
+    const arr = myString.split(""); // myString.length;
     const stringLength = arr.length;
 
     if (stringLength < 4) {
       return myString;
     }
-    arr.splice(stringLength - 1, 1, 'x');
-    arr.splice(stringLength - 2, 1, 'x');
-    arr.splice(stringLength - 3, 1, 'x');
-    arr.splice(stringLength - 4, 1, 'x');
-    return arr.join('');
+    arr.splice(stringLength - 1, 1, "x");
+    arr.splice(stringLength - 2, 1, "x");
+    arr.splice(stringLength - 3, 1, "x");
+    arr.splice(stringLength - 4, 1, "x");
+    return arr.join("");
   }
 
   static sessionManager = async () => {
-    const data = {} as {code: number; route: string; message: string};
+    const data = {} as { code: number; route: string; message: string };
     const now = new Date();
-    const sessionTime = await AppStorage.getData('expireAt');
+    const sessionTime = await AppStorage.getData("expireAt");
     const token = await AppStorage.getToken();
 
     let timeNow = now.getTime();
 
     if (timeNow > sessionTime || token === null) {
       await AppStorage.deleteToken();
-      await AppStorage.deleteData('expireAt');
+      await AppStorage.deleteData("expireAt");
       if (sessionTime) {
         data.code = 1;
-        data.route = 'AuthStack';
-        data.message = 'Your session expired!';
+        data.route = "AuthStack";
+        data.message = "Your session expired!";
         return data;
       } else {
         data.code = 2;
-        data.route = 'OnBoard';
-        data.message = 'Session expired!';
+        data.route = "OnBoard";
+        data.message = "Session expired!";
         return data;
       }
     } else {
       data.code = 3;
-      data.route = 'DashboardTab';
+      data.route = "DashboardTab";
       return data;
     }
   };
 
   static repaymentType = (text: string) => {
-    let result = '';
+    let result = "";
     switch (text) {
-      case 'in-app-card':
-        result = 'card';
+      case "in-app-card":
+        result = "card";
         break;
-      case 'in-app-wallet':
-        result = 'wallet';
+      case "in-app-wallet":
+        result = "wallet";
         break;
-      case 'auto-debit-card':
-        result = 'auto debit';
+      case "auto-debit-card":
+        result = "auto debit";
         break;
-      case 'in-app-transfer':
-        result = 'bank transfer';
+      case "in-app-transfer":
+        result = "bank transfer";
         break;
-      case 'auto-debit-wallet':
-        result = 'admin debit';
+      case "auto-debit-wallet":
+        result = "admin debit";
         break;
-      case 'recovery-agent-debit':
-        result = 'agent debit';
+      case "recovery-agent-debit":
+        result = "agent debit";
         break;
       default:
         break;
@@ -178,72 +178,72 @@ export default class Utility {
   };
 
   static transactionType = (text: string) => {
-    let result = 'Other transaction';
+    let result = "Other transaction";
 
     switch (text) {
-      case 'refund':
-        result = 'Transaction refund';
+      case "refund":
+        result = "Transaction refund";
         break;
-      case 'card-addition':
-      case 'tokenization':
-        result = 'Add card transaction';
+      case "card-addition":
+      case "tokenization":
+        result = "Add card transaction";
         break;
-      case 'bill-airtime':
-      case 'bill-data-bundle':
-      case 'bill-electricity':
-      case 'bill-cable-tv':
-        result = 'Bills payment';
+      case "bill-airtime":
+      case "bill-data-bundle":
+      case "bill-electricity":
+      case "bill-cable-tv":
+        result = "Bills payment";
         break;
-      case 'card-funding':
-        result = 'Fund wallet with card';
+      case "card-funding":
+        result = "Fund wallet with card";
         break;
-      case 'admin-debit':
-        result = 'Admin debit';
+      case "admin-debit":
+        result = "Admin debit";
         break;
-      case 'wallet-funding':
-        result = 'Wallet funding';
+      case "wallet-funding":
+        result = "Wallet funding";
         break;
-      case 'loan-repayment':
-        result = 'Loan repayment';
+      case "loan-repayment":
+        result = "Loan repayment";
         break;
-      case 'transfer-debit':
-        result = 'Bank transfer debit';
+      case "transfer-debit":
+        result = "Bank transfer debit";
         break;
-      case 'transfer-credit':
-        result = 'Bank transfer credit';
+      case "transfer-credit":
+        result = "Bank transfer credit";
         break;
-      case 'loan-disbursement':
-        result = 'Loan disbursement';
+      case "loan-disbursement":
+        result = "Loan disbursement";
         break;
-      case 'loan-disbursement':
-        result = 'Loan disbursement';
+      case "loan-disbursement":
+        result = "Loan disbursement";
         break;
-      case 'fund-loan-lien':
-        result = 'Fund loan lien wallet';
+      case "fund-loan-lien":
+        result = "Fund loan lien wallet";
         break;
-      case 'wallet-refund':
-        result = 'Wallet refund';
+      case "wallet-refund":
+        result = "Wallet refund";
         break;
-      case 'send-money':
-        result = 'Send money';
+      case "send-money":
+        result = "Send money";
         break;
-      case 'send-money-fee':
-        result = 'Send money charge';
+      case "send-money-fee":
+        result = "Send money charge";
         break;
-      case 'transaction-fee':
-        result = 'Fund wallet fee';
+      case "transaction-fee":
+        result = "Fund wallet fee";
         break;
-      case 'promo':
-        result = 'Promo bonus';
+      case "promo":
+        result = "Promo bonus";
         break;
-      case 'referral':
-        result = 'Referral bonus';
+      case "referral":
+        result = "Referral bonus";
         break;
-      case 'bonanza':
-        result = 'Biller bonus';
+      case "bonanza":
+        result = "Biller bonus";
         break;
-      case 'commission-payout':
-        result = 'Commission payout';
+      case "commission-payout":
+        result = "Commission payout";
         break;
       default:
         break;
@@ -252,28 +252,28 @@ export default class Utility {
   };
 
   static billerType = (text: string) => {
-    let result = 'Biller transaction';
+    let result = "Biller transaction";
     switch (text) {
-      case 'bill-airtime':
-        result = 'Airtime purchase';
+      case "bill-airtime":
+        result = "Airtime purchase";
         break;
-      case 'bill-data-bundle':
-        result = 'Data bundle refill';
+      case "bill-data-bundle":
+        result = "Data bundle refill";
         break;
-      case 'bill-electricity':
-        result = 'Electricity purchase';
+      case "bill-electricity":
+        result = "Electricity purchase";
         break;
-      case 'bill-data-bundle-pin':
-        result = 'Data bundle pin refill';
+      case "bill-data-bundle-pin":
+        result = "Data bundle pin refill";
         break;
-      case 'bill-airtime-pin':
-        result = 'Airtime pin purchase';
+      case "bill-airtime-pin":
+        result = "Airtime pin purchase";
         break;
-      case 'bill-cable-tv':
-        result = 'Cable Tv purchase';
+      case "bill-cable-tv":
+        result = "Cable Tv purchase";
         break;
-      case 'payout':
-        result = 'Commission payout';
+      case "payout":
+        result = "Commission payout";
         break;
       default:
         break;
@@ -283,6 +283,6 @@ export default class Utility {
 
   static networkDelay = async (max = 5) => {
     const ranValue = Math.floor(Math.random() * max);
-    return new Promise(res => setTimeout(res, ranValue));
+    return new Promise((res) => setTimeout(res, ranValue));
   };
 }
