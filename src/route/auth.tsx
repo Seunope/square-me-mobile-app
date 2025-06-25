@@ -1,9 +1,13 @@
 import React from "react";
+import BVN from "../screens/auth/bvn";
 import SignUp from "../screens/auth/signup";
+import EmailOptIn from "../screens/auth/email/opt-in";
 import AddPin from "../screens/auth/pin/add-pin";
 import ConfirmPin from "../screens/auth/pin/confirm-pin";
 import VerifyPhone from "../screens/auth/verify-phone";
 import SuccessScreen from "../screens/auth/success-screen";
+import AddEmail from "../screens/auth/email/add-email";
+import VerifyEmail from "../screens/auth/email/verify-email";
 // import OtpVerify from "../screens/auth/register/verify-otp";
 // import ShopImage from "../screens/auth/register/shop-image";
 // import DataPolicy from "../screens/auth/register/data-policy";
@@ -24,10 +28,10 @@ export type AuthStackParams = {
   SuccessScreen: undefined;
   AddPin: undefined;
   ConfirmPin: undefined;
-  ResetPassword: undefined;
-  ForgotPassword: undefined;
-  AcquisitionPersonal: undefined;
-  // VerifyPasswordRequest: undefined;
+  BVN: undefined;
+  EmailOptIn: undefined;
+  AddEmail: undefined;
+  VerifyEmail: undefined;
 };
 const AuthStack = createNativeStackNavigator<AuthStackParams>();
 export default () => (
@@ -84,6 +88,44 @@ export default () => (
     <AuthStack.Screen
       name="ConfirmPin"
       component={ConfirmPin}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+
+    <AuthStack.Screen
+      name="BVN"
+      component={BVN}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+    <AuthStack.Screen
+      name="EmailOptIn"
+      component={EmailOptIn}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+
+    <AuthStack.Screen
+      name="AddEmail"
+      component={AddEmail}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+    <AuthStack.Screen
+      name="VerifyEmail"
+      component={VerifyEmail}
       options={{
         headerTitle: "",
         headerTransparent: true,

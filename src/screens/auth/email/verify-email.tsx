@@ -1,24 +1,57 @@
+import PhoneInput, {
+  isValidPhoneNumber,
+} from "react-native-international-phone-number";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
   StatusBar,
+  SafeAreaView,
   Keyboard,
 } from "react-native";
-import Button from "../../../components/Button";
-import KiteIcon from "../../../assets/auth/kite";
-import React, { useState, useEffect } from "react";
-import { moderateScale } from "../../../utils/scaling";
-import { useNavigation } from "@react-navigation/native";
+import LinearGradient from "react-native-linear-gradient";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import HelpCircleIcon from "../../../assets/auth/help-circle";
+import StarIcon from "../../../assets/auth/star";
 import { colors, fonts, sizes } from "../../../utils/theme";
+import InputBar from "../../../components/InputBar";
+import Button from "../../../components/Button";
 import BackArrowIcon from "../../../assets/common/back-arrow";
+import KiteIcon from "../../../assets/auth/kite";
+import { useNavigation } from "@react-navigation/native";
 import SmoothPinCodeInput from "@zfloc/react-native-smooth-pincode-input";
+import { moderateScale } from "../../../utils/scaling";
 
-export const ConfirmPinScreen = () => {
+export const PhoneVerificationScreen = () => {
   const navigation = useNavigation<any>();
   const [code, setCode] = useState("");
+  const [timer, setTimer] = useState(30);
   const [isFilled, setIsFilled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  const renderCodeInputs = () => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <View
+        key={i}
+        style={[styles.codeInput, code.length > i && styles.codeInputFilled]}
+      />
+    ));
+  };
 
   return (
     <View style={styles.container}>
@@ -30,11 +63,14 @@ export const ConfirmPinScreen = () => {
         >
           <BackArrowIcon />
         </TouchableOpacity>
-        <Text style={styles.title}>Confirm your Security PIN</Text>
+        <Text style={styles.title}>Verify your email address</Text>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.subtitle}>Input your six (6) digit PIN again</Text>
+        <Text style={styles.subtitle}>
+          Please input the five (5) digit code that was sent to your email
+          address below
+        </Text>
 
         <View style={styles.containerOTP}>
           <SmoothPinCodeInput
@@ -50,18 +86,32 @@ export const ConfirmPinScreen = () => {
             onBackspace={() => setIsFilled(false)}
           />
         </View>
+
+        <View style={styles.timerContainer}>
+          <Text style={styles.timerText}>{formatTime(timer)}</Text>
+          <TouchableOpacity disabled={timer > 0}>
+            <Text
+              style={[
+                styles.resendText,
+                timer > 0 && styles.resendTextDisabled,
+              ]}
+            >
+              Resend code
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.footer}>
         <Button
-          btnTxt="Submit"
+          btnTxt="Verify"
           onPress={() =>
             navigation.navigate("AuthStack", {
               screen: "SuccessScreen",
               params: {
                 details: {
-                  nextScreen: "BVN",
-                  message: "You have successfully created your security pin.",
-                  title: "PIN Created Successfully!",
+                  nextScreen: "",
+                  message: "Your email address has been added successfully.",
+                  title: "Email added successfully!",
                 },
               },
             })
@@ -71,8 +121,7 @@ export const ConfirmPinScreen = () => {
     </View>
   );
 };
-export default ConfirmPinScreen;
-
+export default PhoneVerificationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
