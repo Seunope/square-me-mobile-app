@@ -1,5 +1,9 @@
 import React from "react";
 import SignUp from "../screens/auth/signup";
+import AddPin from "../screens/auth/pin/add-pin";
+import ConfirmPin from "../screens/auth/pin/confirm-pin";
+import VerifyPhone from "../screens/auth/verify-phone";
+import SuccessScreen from "../screens/auth/success-screen";
 // import OtpVerify from "../screens/auth/register/verify-otp";
 // import ShopImage from "../screens/auth/register/shop-image";
 // import DataPolicy from "../screens/auth/register/data-policy";
@@ -16,11 +20,10 @@ import { colors } from "../utils/theme";
 export type AuthStackParams = {
   LogIn: undefined;
   SignUp: undefined;
-  OtpVerify: undefined;
-  ShopImage: undefined;
-  DataPolicy: undefined;
-  Acquisition: undefined;
+  VerifyPhone: undefined;
   SuccessScreen: undefined;
+  AddPin: undefined;
+  ConfirmPin: undefined;
   ResetPassword: undefined;
   ForgotPassword: undefined;
   AcquisitionPersonal: undefined;
@@ -48,27 +51,47 @@ export default () => (
       }}
     />
 
+    <AuthStack.Screen
+      name={"VerifyPhone"}
+      component={VerifyPhone}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+
+    <AuthStack.Screen
+      name={"SuccessScreen"}
+      component={SuccessScreen}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+
+    <AuthStack.Screen
+      name="AddPin"
+      component={AddPin}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+
+    <AuthStack.Screen
+      name="ConfirmPin"
+      component={ConfirmPin}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
+
     {/* <AuthStack.Screen
-      name="DataPolicy"
-      component={DataPolicy}
-      options={{
-        headerTitle: "",
-        headerTransparent: true,
-        headerTintColor: colors.black[100],
-      }}
-    />
-
-    <AuthStack.Screen
-      name="ShopImage"
-      component={ShopImage}
-      options={{
-        headerTitle: "",
-        headerTransparent: true,
-        headerTintColor: colors.black[100],
-      }}
-    />
-
-    <AuthStack.Screen
       name="Acquisition"
       component={Acquisition}
       options={{

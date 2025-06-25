@@ -18,8 +18,10 @@ import StarIcon from "../../assets/auth/star";
 import { colors, fonts, sizes } from "../../utils/theme";
 import InputBar from "../../components/InputBar";
 import Button from "../../components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUp = () => {
+  const navigation = useNavigation<any>();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("080 0000 000");
@@ -95,7 +97,11 @@ const SignUp = () => {
       <View style={styles.footer}>
         <Button
           btnTxt="Next"
-          onPress={() => console.log("Create account")}
+          onPress={() =>
+            navigation.navigate("AuthStack", {
+              screen: "VerifyPhone",
+            })
+          }
         ></Button>
 
         <TouchableOpacity style={styles.loginLink}>
@@ -209,7 +215,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingHorizontal: sizes.lg,
-    paddingBottom: 40,
+    paddingBottom: sizes["3xl"],
   },
 
   loginLink: {
