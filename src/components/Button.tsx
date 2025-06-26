@@ -6,6 +6,7 @@ interface Props {
   btnTxt: string;
   variant?: string;
   bgColor?: string;
+  disabled?: boolean;
   outline?: boolean;
   marginTop?: string;
   outlineColor?: string;

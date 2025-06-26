@@ -11,6 +11,9 @@ import {
   StatusBar,
   SafeAreaView,
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -54,90 +57,115 @@ export const PhoneVerificationScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.pop(1)}
-        >
-          <BackArrowIcon />
-        </TouchableOpacity>
-        <Text style={styles.title}>Verify phone number</Text>
-      </View>
-
-      <View style={styles.content}>
-        <View style={styles.illustrationContainer}>
-          <KiteIcon />
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoidingView}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
+      >
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.pop(1)}
+          >
+            <BackArrowIcon />
+          </TouchableOpacity>
+          <Text style={styles.title}>Verify phone number</Text>
         </View>
 
-        <Text style={styles.verificationTitle}>Check your WhatsApp</Text>
-        <Text style={styles.subtitle}>
-          Please input the five (5) digit code that was sent to your Whatsapp
-          below
-        </Text>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.content}>
+            <View style={styles.illustrationContainer}>
+              <KiteIcon />
+            </View>
 
-        <View style={styles.containerOTP}>
-          <SmoothPinCodeInput
-            cellStyle={styles.pinCode}
-            cellStyleFocused={styles.pinCodeFocus}
-            mask="*"
-            codeLength={4}
-            password={true}
-            value={code}
-            keyboardType={"default"}
-            onTextChange={(value: any) => setCode(value)}
-            onFulfill={() => (setIsFilled(true), Keyboard.dismiss())}
-            onBackspace={() => setIsFilled(false)}
+            <Text style={styles.verificationTitle}>Check your WhatsApp</Text>
+            <Text style={styles.subtitle}>
+              Please input the five (5) digit code that was sent to your
+              Whatsapp below
+            </Text>
+
+            <View style={styles.containerOTP}>
+              <SmoothPinCodeInput
+                cellStyle={styles.pinCode}
+                cellStyleFocused={styles.pinCodeFocus}
+                mask="*"
+                codeLength={4}
+                password={true}
+                value={code}
+                keyboardType={"default"}
+                onTextChange={(value: any) => setCode(value)}
+                onFulfill={() => (setIsFilled(true), Keyboard.dismiss())}
+                onBackspace={() => setIsFilled(false)}
+              />
+            </View>
+
+            <View style={styles.timerContainer}>
+              <Text style={styles.timerText}>{formatTime(timer)}</Text>
+              <TouchableOpacity disabled={timer > 0}>
+                <Text
+                  style={[
+                    styles.resendText,
+                    timer > 0 && styles.resendTextDisabled,
+                  ]}
+                >
+                  Resend code
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+
+        <View style={styles.footer}>
+          <Button
+            btnTxt="Verify"
+            onPress={() =>
+              navigation.navigate("AuthStack", {
+                screen: "SuccessScreen",
+                params: {
+                  details: {
+                    nextScreen: "AddPin",
+                    message:
+                      "Your phone number has been verified successfully.",
+                    title: "Verification Successful!",
+                  },
+                },
+              })
+            }
           />
         </View>
-
-        <View style={styles.timerContainer}>
-          <Text style={styles.timerText}>{formatTime(timer)}</Text>
-          <TouchableOpacity disabled={timer > 0}>
-            <Text
-              style={[
-                styles.resendText,
-                timer > 0 && styles.resendTextDisabled,
-              ]}
-            >
-              Resend code
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.footer}>
-        <Button
-          btnTxt="Verify"
-          onPress={() =>
-            navigation.navigate("AuthStack", {
-              screen: "SuccessScreen",
-              params: {
-                details: {
-                  nextScreen: "AddPin",
-                  message: "Your phone number has been verified successfully.",
-                  title: "Verification Successful!",
-                },
-              },
-            })
-          }
-        ></Button>
-      </View>
-    </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
+
 export default PhoneVerificationScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: sizes.md,
     paddingVertical: sizes.md,
-    // justifyContent: "space-between",
   },
   backButton: {
     padding: sizes.xs,
@@ -158,19 +186,22 @@ const styles = StyleSheet.create({
     fontSize: sizes.lg,
     fontFamily: fonts.medium,
     color: colors.blue["90"],
-    // marginBottom: sizes.xs,
-    // flex: 1,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: sizes.lg,
     paddingTop: sizes["2xl"],
+    justifyContent: "center", // Center content vertically
+    minHeight: 400, // Ensure minimum height for content
   },
   footer: {
     paddingHorizontal: sizes.lg,
     paddingBottom: sizes["3xl"],
+    paddingTop: sizes.md, // Add top padding to separate from content
+    backgroundColor: "#fff", // Ensure footer has background
+    borderTopWidth: 1,
+    borderTopColor: "transparent", // Optional: add subtle border
   },
-
   subtitle: {
     fontSize: sizes.md,
     fontFamily: fonts.regular,
@@ -185,25 +216,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pinCode: {
-    // padding: sizes.lg,
     height: moderateScale(60),
     width: moderateScale(60),
     marginRight: sizes.md,
     borderRadius: moderateScale(8),
     backgroundColor: colors.gray[80],
   },
-
   pinCodeFocus: {
     borderWidth: 1,
     borderColor: colors.blue[100],
   },
-  // Verification  Styles
+  // Verification Styles
   illustrationContainer: {
     alignItems: "center",
     marginBottom: sizes["3xl"],
     height: 100,
   },
-
   verificationTitle: {
     fontSize: sizes.md,
     fontFamily: fonts.medium,

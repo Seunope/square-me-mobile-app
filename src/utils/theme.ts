@@ -56,7 +56,7 @@ export const sizes = {
   xs: moderateScale(10),
   sm: moderateScale(12),
   "2sm": moderateScale(14),
-  md: moderateScale(16),
+  md: moderateScale(15),
   lg: moderateScale(20),
   xl: moderateScale(24),
   "2xl": moderateScale(32),

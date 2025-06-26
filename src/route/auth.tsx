@@ -1,5 +1,6 @@
 import React from "react";
 import BVN from "../screens/auth/bvn";
+import LogIn from "../screens/auth/login";
 import SignUp from "../screens/auth/signup";
 import EmailOptIn from "../screens/auth/email/opt-in";
 import AddPin from "../screens/auth/pin/add-pin";
@@ -37,7 +38,7 @@ const AuthStack = createNativeStackNavigator<AuthStackParams>();
 export default () => (
   <AuthStack.Navigator
     // initialRouteName="Acquisition"
-    initialRouteName="SignUp"
+    initialRouteName="LogIn"
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
@@ -45,6 +46,15 @@ export default () => (
       //   cardStyle: { backgroundColor: "transparent" },
     }}
   >
+    <AuthStack.Screen
+      name={"LogIn"}
+      component={LogIn}
+      options={{
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: colors.black[100],
+      }}
+    />
     <AuthStack.Screen
       name={"SignUp"}
       component={SignUp}

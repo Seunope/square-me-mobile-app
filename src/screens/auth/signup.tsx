@@ -1,7 +1,3 @@
-import PhoneInput, {
-  isValidPhoneNumber,
-} from "react-native-international-phone-number";
-import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,111 +5,122 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import HelpCircleIcon from "../../assets/auth/help-circle";
-import StarIcon from "../../assets/auth/star";
-import { colors, fonts, sizes } from "../../utils/theme";
-import InputBar from "../../components/InputBar";
+import React from "react";
+import { Formik } from "formik";
 import Button from "../../components/Button";
+import StarIcon from "../../assets/auth/star";
+import InputBar from "../../components/InputBar";
+import { SignUpSchema } from "../../utils/schema";
+import { colors, fonts, sizes } from "../../utils/theme";
+import HelpCircleIcon from "../../assets/auth/help-circle";
 import { useNavigation } from "@react-navigation/native";
 
 const SignUp = () => {
   const navigation = useNavigation<any>();
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [inputValue, setInputValue] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("080 0000 000");
-  const [referralCode, setReferralCode] = useState("");
-
-  function handleInputValue(phoneNumber) {
-    setInputValue(phoneNumber);
-  }
-
-  function handleSelectedCountry(country) {
-    setSelectedCountry(country);
-  }
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <View style={styles.header}>
-        <Text style={styles.brandName}>
-          squareme <StarIcon />
-        </Text>
-        <TouchableOpacity style={styles.helpButton}>
-          <HelpCircleIcon />
-        </TouchableOpacity>
-      </View>
+    <Formik
+      initialValues={{ phoneNumber: "0800000000", referralCode: "" }}
+      validationSchema={SignUpSchema}
+      onSubmit={(values) => {
+        navigation.navigate("AuthStack", {
+          screen: "VerifyPhone",
+          params: { phoneNumber: values.phoneNumber },
+        });
+      }}
+    >
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        values,
+        errors,
+        touched,
+      }) => (
+        <View style={styles.container}>
+          <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+          <View style={styles.header}>
+            <Text style={styles.brandName}>
+              squareme <StarIcon />
+            </Text>
+            <TouchableOpacity style={styles.helpButton}>
+              <HelpCircleIcon />
+            </TouchableOpacity>
+          </View>
 
-      <View style={styles.content}>
-        <Text style={styles.title}>Create an account</Text>
-        <Text style={styles.subtitle}>
-          Enter your phone number and we'll send an SMS with a code to verify
-          your phone number.
-        </Text>
+          <View style={styles.content}>
+            <Text style={styles.title}>Create an account</Text>
+            <Text style={styles.subtitle}>
+              Enter your phone number and we'll send an SMS with a code to
+              verify your phone number.
+            </Text>
 
-        <View style={styles.inputContainer}>
-          {/* <PhoneInput
-            value={inputValue}
-            defaultValue="+234700000000"
-            onChangePhoneNumber={handleInputValue}
-            selectedCountry={selectedCountry}
-            onChangeSelectedCountry={handleSelectedCountry}
-          /> */}
-
-          <Text style={styles.inputLabel}>Phone Number</Text>
-          <View style={styles.phoneInputContainer}>
-            <View style={styles.flagContainer}>
-              <View style={[styles.flag, { backgroundColor: "#008751" }]} />
-              <View style={[styles.flag, { backgroundColor: "#fff" }]} />
-              <View style={[styles.flag, { backgroundColor: "#008751" }]} />
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Phone Number</Text>
+              <View style={styles.phoneInputContainer}>
+                <View style={styles.flagContainer}>
+                  <View style={[styles.flag, { backgroundColor: "#008751" }]} />
+                  <View style={[styles.flag, { backgroundColor: "#fff" }]} />
+                  <View style={[styles.flag, { backgroundColor: "#008751" }]} />
+                </View>
+                <TextInput
+                  style={[
+                    styles.phoneInput,
+                    touched.phoneNumber && errors.phoneNumber
+                      ? styles.inputError
+                      : null,
+                  ]}
+                  value={values.phoneNumber}
+                  onChangeText={handleChange("phoneNumber")}
+                  onBlur={handleBlur("phoneNumber")}
+                  keyboardType="phone-pad"
+                  placeholder="0800000000"
+                />
+              </View>
+              {touched.phoneNumber && errors.phoneNumber && (
+                <Text style={styles.errorText}>{errors.phoneNumber}</Text>
+              )}
             </View>
-            <TextInput
-              style={styles.phoneInput}
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
-              keyboardType="phone-pad"
-            />
+
+            <View style={styles.inputContainer}>
+              <InputBar
+                label="Referral Code (Optional)"
+                placeholder="Enter referral code"
+                value={values.referralCode}
+                onChangeText={handleChange("referralCode")}
+                // onBlur={handleBlur("referralCode")}
+              />
+              {touched.referralCode && errors.referralCode && (
+                <Text style={styles.errorText}>{errors.referralCode}</Text>
+              )}
+            </View>
+
+            <Text style={styles.termsText}>
+              By signing up, you accept our{" "}
+              <Text style={styles.termsLink}>Terms & Conditions</Text>
+            </Text>
+          </View>
+
+          <View style={styles.footer}>
+            <Button btnTxt="Next" onPress={handleSubmit} />
+            <TouchableOpacity
+              style={styles.loginLink}
+              onPress={() =>
+                navigation.navigate("AuthStack", { screen: "LogIn" })
+              }
+            >
+              <Text style={styles.loginText}>
+                Already have an account?{" "}
+                <Text style={styles.loginLinkText}>Login here</Text>
+              </Text>
+            </TouchableOpacity>
+
+            <Text style={styles.versionText}>v2.5.501</Text>
           </View>
         </View>
-
-        <View style={styles.inputContainer}>
-          <InputBar
-            label="Referral Code (Optional)"
-            placeholder="Enter referral code"
-            value={referralCode}
-            onChangeText={setReferralCode}
-          />
-        </View>
-
-        <Text style={styles.termsText}>
-          By signing up, you accept our{" "}
-          <Text style={styles.termsLink}>Terms & Conditions</Text>
-        </Text>
-      </View>
-
-      <View style={styles.footer}>
-        <Button
-          btnTxt="Next"
-          onPress={() =>
-            navigation.navigate("AuthStack", {
-              screen: "VerifyPhone",
-            })
-          }
-        ></Button>
-
-        <TouchableOpacity style={styles.loginLink}>
-          <Text style={styles.loginText}>
-            Already have an account?{" "}
-            <Text style={styles.loginLinkText}>Login here</Text>
-          </Text>
-        </TouchableOpacity>
-
-        <Text style={styles.versionText}>v2.5.501</Text>
-      </View>
-    </View>
+      )}
+    </Formik>
   );
 };
 
@@ -150,11 +157,28 @@ const styles = StyleSheet.create({
     marginBottom: sizes.xs,
     // flex: 1,
   },
+  inputError: {
+    borderColor: colors.red[100],
+    borderWidth: 1,
+  },
+  errorText: {
+    color: colors.red[100],
+    fontSize: sizes.sm,
+    fontFamily: fonts.regular,
+    marginTop: sizes["2sm"],
+  },
   content: {
-    flex: 1,
-    paddingHorizontal: 20,
+    flex: 3,
+    paddingHorizontal: sizes.lg,
     paddingTop: sizes["2xl"],
   },
+  footer: {
+    flex: 0.5,
+    // justifyContent: "flex-end",
+    paddingHorizontal: sizes.lg,
+    paddingBottom: sizes.lg,
+  },
+
   subtitle: {
     fontSize: sizes.md,
     fontFamily: fonts.regular,
@@ -165,7 +189,7 @@ const styles = StyleSheet.create({
 
   // Account Creation Styles
   inputContainer: {
-    marginBottom: 24,
+    marginBottom: sizes.sm,
   },
   inputLabel: {
     fontSize: sizes.md,
@@ -205,17 +229,13 @@ const styles = StyleSheet.create({
   },
   termsText: {
     color: "#666",
-    fontSize: sizes.sm,
+    fontSize: sizes.xs,
     textAlign: "center",
     fontFamily: fonts.regular,
-    marginTop: sizes.md,
+    marginTop: sizes.sm,
   },
   termsLink: {
     color: colors.purple[100],
-  },
-  footer: {
-    paddingHorizontal: sizes.lg,
-    paddingBottom: sizes["3xl"],
   },
 
   loginLink: {
