@@ -1,15 +1,8 @@
 import React from "react";
 import AuthStack from "./auth";
-import Onboarding from "../screens/onboarding";
+import DashboardTab from "./dashboard";
 // import MoreStack from "./more";
-// import OrderStack from "./retail/order";
-// import DashboardTab from "./retail/dashboard";
-// import Welcome from "../screens/auth/welcome";
-// import DashboardDiver from "./driver/dashboard";
-// import DashboardCAA from "../screens/caa/dashboard";
-// import WholeSaleOrderStack from "./wholesale/order";
-// import DriverOrderStack from "./driver/order";
-// import DashboardTabWholeSaler from "./wholesale/dashboard";
+import Onboarding from "../screens/onboarding";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStaticNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -20,13 +13,7 @@ type RootStackParamList = {
   AuthStack: undefined;
   MoreStack: undefined;
   Onboarding: undefined;
-  OrderStack: undefined;
   DashboardTab: undefined;
-  DashboardCAA: undefined;
-  DashboardDiver: undefined;
-  DriverOrderStack: undefined;
-  WholeSaleOrderStack: undefined;
-  DashboardTabWholeSaler: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -47,6 +34,13 @@ const RootStackScreen = ({ ...props }) => {
       <RootStack.Screen
         name="AuthStack"
         component={AuthStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <RootStack.Screen
+        name="DashboardTab"
+        component={DashboardTab}
         options={{
           headerShown: false,
         }}

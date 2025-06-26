@@ -28,9 +28,7 @@ const LogIn = () => {
       initialValues={{ code: "" }}
       validationSchema={LogInSchema}
       onSubmit={(values) => {
-        navigation.navigate("AuthStack", {
-          screen: "VerifyPhone",
-        });
+        navigation.navigate("DashboardTab");
       }}
     >
       {({

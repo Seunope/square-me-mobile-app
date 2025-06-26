@@ -1,12 +1,8 @@
-import PhoneInput, {
-  isValidPhoneNumber,
-} from "react-native-international-phone-number";
 import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
@@ -15,18 +11,13 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import HelpCircleIcon from "../../assets/auth/help-circle";
-import StarIcon from "../../assets/auth/star";
-import { colors, fonts, sizes } from "../../utils/theme";
-import InputBar from "../../components/InputBar";
 import Button from "../../components/Button";
-import BackArrowIcon from "../../assets/common/back-arrow";
 import KiteIcon from "../../assets/auth/kite";
-import { useNavigation } from "@react-navigation/native";
-import SmoothPinCodeInput from "@zfloc/react-native-smooth-pincode-input";
 import { moderateScale } from "../../utils/scaling";
+import { colors, fonts, sizes } from "../../utils/theme";
+import { useNavigation } from "@react-navigation/native";
+import BackArrowIcon from "../../assets/common/back-arrow";
+import SmoothPinCodeInput from "@zfloc/react-native-smooth-pincode-input";
 
 export const PhoneVerificationScreen = () => {
   const navigation = useNavigation<any>();
@@ -41,19 +32,10 @@ export const PhoneVerificationScreen = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formatTime = (seconds) => {
+  const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
-
-  const renderCodeInputs = () => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <View
-        key={i}
-        style={[styles.codeInput, code.length > i && styles.codeInputFilled]}
-      />
-    ));
   };
 
   return (
@@ -191,16 +173,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: sizes.lg,
     paddingTop: sizes["2xl"],
-    justifyContent: "center", // Center content vertically
-    minHeight: 400, // Ensure minimum height for content
+    justifyContent: "center",
+    minHeight: 400,
   },
   footer: {
     paddingHorizontal: sizes.lg,
     paddingBottom: sizes["3xl"],
-    paddingTop: sizes.md, // Add top padding to separate from content
-    backgroundColor: "#fff", // Ensure footer has background
+    paddingTop: sizes.md,
+    backgroundColor: colors.white[100],
     borderTopWidth: 1,
-    borderTopColor: "transparent", // Optional: add subtle border
+    borderTopColor: "transparent",
   },
   subtitle: {
     fontSize: sizes.md,
