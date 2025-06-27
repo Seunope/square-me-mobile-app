@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import PigBankIcon from "../../../assets/dashboard/pig-bank";
+import { colors, fonts, sizes } from "../../../utils/theme";
+import { moderateScale } from "../../../utils/scaling";
 
 export default function SuggestedActions() {
   return (
@@ -21,18 +24,12 @@ export default function SuggestedActions() {
           <Text style={styles.cardTitle}>
             Earn up to 14% interest{"\n"}on your locked funds
           </Text>
-          <View style={styles.piggyBank}>
-            <View style={styles.coin} />
-            <View style={styles.piggy} />
-          </View>
+          <PigBankIcon />
         </TouchableOpacity>
 
         <TouchableOpacity style={[styles.card, styles.paymentsCard]}>
           <Text style={styles.cardTitle}>Speed up your{"\n"}payments</Text>
-          <View style={styles.coinStack}>
-            <View style={[styles.stackCoin, { backgroundColor: "#FF9500" }]} />
-            <View style={[styles.stackCoin, { backgroundColor: "#34C759" }]} />
-          </View>
+          <PigBankIcon />
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -42,22 +39,23 @@ export default function SuggestedActions() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: sizes["2xl"],
   },
   title: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
-    marginBottom: 16,
+    fontSize: sizes.md,
+    fontFamily: fonts.medium,
+    color: colors.black[100],
+    marginBottom: sizes.md,
   },
   cardsContainer: {
     flexDirection: "row",
   },
   card: {
-    width: 200,
-    height: 120,
-    borderRadius: 16,
-    padding: 16,
-    marginRight: 16,
+    width: moderateScale(200),
+    height: "auto",
+    borderRadius: sizes.md,
+    padding: sizes.md,
+    marginRight: sizes.md,
     justifyContent: "space-between",
   },
   savingsCard: {
@@ -67,9 +65,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#E3F2FD",
   },
   cardTitle: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#000",
+    fontSize: sizes.sm,
+    fontFamily: fonts.medium,
+    color: colors.blue[100],
     lineHeight: 20,
   },
   piggyBank: {
