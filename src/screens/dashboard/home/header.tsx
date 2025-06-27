@@ -1,30 +1,36 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import BellIcon from "../../../assets/dashboard/bell";
+import AddIcon from "../../../assets/dashboard/add";
+import GiftIcon from "../../../assets/dashboard/gift";
+import { colors, fonts, sizes } from "../../../utils/theme";
 
 export default function Header() {
   return (
     <View style={styles.container}>
       <View style={styles.leftSection}>
         <Image
-          source={{ uri: "https://via.placeholder.com/40x40" }}
+          source={{
+            uri: "https://res.cloudinary.com/aloc-ng/image/upload/v1711706693/Groupay/Profile/itkxqfdzssu3jneghm66.jpg",
+          }}
           style={styles.avatar}
         />
         <Text style={styles.greeting}>Hi David,</Text>
       </View>
       <View style={styles.rightSection}>
         <TouchableOpacity style={styles.iconButton}>
-          <View style={styles.iconContainer}>
-            <Icon name="add" size={20} color="white" />
-          </View>
+          {/* <View style={styles.iconContainer}> */}
+          <AddIcon />
+          {/* </View> */}
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <View style={styles.iconContainer}>
-            <Icon name="search" size={20} color="white" />
-          </View>
+          {/* <View style={styles.iconContainer}> */}
+          <GiftIcon />
+          {/* </View> */}
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <Icon name="notifications" size={24} color="black" />
+          <BellIcon />
         </TouchableOpacity>
       </View>
     </View>
@@ -49,9 +55,9 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   greeting: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
+    fontSize: sizes.md,
+    fontFamily: fonts.regular,
+    color: colors.black[100],
   },
   rightSection: {
     flexDirection: "row",

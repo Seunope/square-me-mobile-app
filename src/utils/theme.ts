@@ -18,6 +18,7 @@ export const colors = {
     100: "#4C525E",
     90: "#DEDEDE",
     80: "#F3F4F7",
+    70: "#F9F9F9",
   },
 
   blue: {

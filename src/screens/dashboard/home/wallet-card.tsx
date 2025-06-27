@@ -1,32 +1,60 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import EyeIcon from "../../../assets/dashboard/eye";
+import CopyIcon from "../../../assets/dashboard/copy";
+import { colors, fonts, sizes } from "../../../utils/theme";
+import ArrowRightIcon from "../../../assets/dashboard/arrow-head-right";
+import Utility from "../../../utils/utils";
 
 export default function WalletCard() {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require("../../../assets/dashboard/wallet-bg.png")}
+      style={styles.container}
+      imageStyle={{ borderRadius: 16 }}
+    >
       <View style={styles.header}>
-        <Text style={styles.label}>Wallet Balance</Text>
+        <Text style={styles.label}></Text>
         <TouchableOpacity>
-          <Text style={styles.historyLink}>Transaction History</Text>
+          <Text style={styles.historyLink}>
+            Transaction History <ArrowRightIcon />
+          </Text>
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.balance}>NGN 500,000.00</Text>
+      <Text style={styles.label} onPress={() => toggleVisibility()}>
+        Wallet Balance <EyeIcon />
+      </Text>
+      <Text style={styles.balance}>
+        {" "}
+        {Utility.formatAmount(5000000, true, 2, !isVisible)}
+      </Text>
 
       <View style={styles.footer}>
         <Text style={styles.squaremeTag}>Squareme tag: @davidoloye22</Text>
         <TouchableOpacity>
-          <Icon name="content-copy" size={20} color="white" />
+          <CopyIcon />
         </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1a237e",
+    backgroundColor: colors.blue[100],
     borderRadius: 16,
     padding: 20,
     marginBottom: 24,
@@ -38,29 +66,40 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    color: "white",
-    fontSize: 14,
+    color: colors.white[100],
+    fontSize: sizes.sm,
+    textAlign: "center",
+    marginBottom: sizes.xs,
+    fontFamily: fonts.regular,
     opacity: 0.8,
   },
   historyLink: {
-    color: "white",
-    fontSize: 14,
-    textDecorationLine: "underline",
+    color: colors.white[100],
+    fontSize: sizes.sm,
+    borderRadius: sizes.md,
+    backgroundColor: colors.blue[90],
+    padding: sizes["2xs"],
+    fontFamily: fonts.regular,
+    paddingHorizontal: sizes.xs,
   },
   balance: {
-    color: "white",
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 20,
+    color: colors.white[100],
+    fontSize: sizes.xl,
+    textAlign: "center",
+    fontFamily: fonts.medium,
+    marginBottom: sizes.lg,
   },
   footer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.blue[90],
   },
   squaremeTag: {
-    color: "white",
-    fontSize: 14,
+    color: colors.white[100],
+    fontSize: sizes.sm,
+    paddingRight: sizes.sm,
+    fontFamily: fonts.regular,
     opacity: 0.8,
   },
 });

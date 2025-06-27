@@ -6,14 +6,19 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { colors, fonts, sizes } from "../../../utils/theme";
+import CardsIcon from "../../../assets/dashboard/quick-actions/cards";
+import WithdrawIcon from "../../../assets/dashboard/quick-actions/withdraw";
+import PayBillsIcon from "../../../assets/dashboard/quick-actions/pay-bills";
+import FundWalletIcon from "../../../assets/dashboard/quick-actions/fund-wallet";
+import SquareMePosIcon from "../../../assets/dashboard/quick-actions/square-me-pos";
 
 const quickActions = [
-  { id: 1, title: "Fund Wallet", icon: "account-balance-wallet" },
-  { id: 2, title: "Withdraw", icon: "trending-up" },
-  { id: 3, title: "Pay Bills", icon: "receipt" },
-  { id: 4, title: "Cards", icon: "credit-card" },
-  { id: 5, title: "Squareme Pos", icon: "point-of-sale" },
+  { id: 1, title: "Fund Wallet", icon: <FundWalletIcon /> },
+  { id: 2, title: "Withdraw", icon: <WithdrawIcon /> },
+  { id: 3, title: "Pay Bills", icon: <PayBillsIcon /> },
+  { id: 4, title: "Cards", icon: <CardsIcon /> },
+  { id: 5, title: "Squareme Pos", icon: <SquareMePosIcon /> },
 ];
 
 export default function QuickActions() {
@@ -33,9 +38,7 @@ export default function QuickActions() {
       >
         {quickActions.map((action) => (
           <TouchableOpacity key={action.id} style={styles.actionItem}>
-            <View style={styles.iconContainer}>
-              <Icon name={action.icon} size={24} color="#007AFF" />
-            </View>
+            <View style={styles.iconContainer}>{action.icon}</View>
             <Text style={styles.actionText}>{action.title}</Text>
           </TouchableOpacity>
         ))}
@@ -52,38 +55,40 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 16,
+    marginBottom: sizes.md,
   },
   title: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
+    fontSize: sizes.md,
+    fontFamily: fonts.medium,
+    color: colors.black[100],
   },
   seeMore: {
-    fontSize: 14,
-    color: "#007AFF",
+    fontSize: sizes.sm,
+    fontFamily: fonts.regular,
+    color: colors.purple[100],
   },
   actionsContainer: {
     flexDirection: "row",
   },
   actionItem: {
     alignItems: "center",
-    marginRight: 20,
-    width: 70,
+    marginRight: sizes.lg,
+    width: sizes["4xl"],
+    backgroundColor: colors.gray[70],
   },
   iconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "#F0F0F0",
+    width: sizes["3xl"],
+    height: sizes["3xl"],
+    borderRadius: sizes["2xs"],
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 0,
   },
   actionText: {
-    fontSize: 12,
+    fontSize: sizes.xs,
+    fontFamily: fonts.regular,
     textAlign: "center",
-    color: "#000",
+    color: colors.black[100],
     lineHeight: 16,
   },
 });

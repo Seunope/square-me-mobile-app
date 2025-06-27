@@ -21,7 +21,7 @@ const RootStackScreen = ({ ...props }) => {
   // console.log("props", props);
   return (
     <RootStack.Navigator
-      initialRouteName="AuthStack"
+      initialRouteName="DashboardTab"
       // initialRouteName={props.isLogin ? props.userRoute : "Onboarding"}
     >
       <RootStack.Screen

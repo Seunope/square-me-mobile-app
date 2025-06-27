@@ -34,7 +34,7 @@ export default class Utility {
       return "____";
     }
     if (hide) {
-      return "--,---";
+      return "NGN********";
     }
 
     let newValue = null;
@@ -50,7 +50,7 @@ export default class Utility {
     if (hideSymbol) {
       return newValue;
     }
-    return `₦${newValue}`;
+    return `NGN ${newValue}`;
   };
 
   static inputWithComma(value: any) {
