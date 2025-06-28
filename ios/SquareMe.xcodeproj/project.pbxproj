@@ -18,6 +18,8 @@
 		5650B61963FE4B9DB48671DE /* ClashGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E08F012F5FE44A7A7DDB96E /* ClashGrotesk-Regular.otf */; };
 		013FF3BB7D824C76B71121F3 /* ClashGrotesk-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 54B26A7DEDBD41198606476C /* ClashGrotesk-Semibold.otf */; };
 		CFD20CBABE94406CB0F73046 /* TwemojiMozilla.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 8B0FD59F401D45248734EC9A /* TwemojiMozilla.woff2 */; };
+		2CA48681DB224A84AA3954B8 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B48B02E985642A49F0B2A91 /* BootSplash.storyboard */; };
+		6E832EC1276B4170BD177C54 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B6C5C2D2C38419EAFE5CA06 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		0E08F012F5FE44A7A7DDB96E /* ClashGrotesk-Regular.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Regular.otf"; path = "../src/assets/fonts/ClashGrotesk-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		54B26A7DEDBD41198606476C /* ClashGrotesk-Semibold.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Semibold.otf"; path = "../src/assets/fonts/ClashGrotesk-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		8B0FD59F401D45248734EC9A /* TwemojiMozilla.woff2 */ = {isa = PBXFileReference; name = "TwemojiMozilla.woff2"; path = "../node_modules/react-native-international-phone-number/lib/assets/fonts/TwemojiMozilla.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0B48B02E985642A49F0B2A91 /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "SquareMe/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2B6C5C2D2C38419EAFE5CA06 /* Colors.xcassets */ = {isa = PBXFileReference; name = "Colors.xcassets"; path = "SquareMe/Colors.xcassets"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = folder.assetcatalog; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				0B48B02E985642A49F0B2A91 /* BootSplash.storyboard */,
+				2B6C5C2D2C38419EAFE5CA06 /* Colors.xcassets */,
 			);
 			name = SquareMe;
 			sourceTree = "<group>";
@@ -222,6 +228,8 @@
 				5650B61963FE4B9DB48671DE /* ClashGrotesk-Regular.otf in Resources */,
 				013FF3BB7D824C76B71121F3 /* ClashGrotesk-Semibold.otf in Resources */,
 				CFD20CBABE94406CB0F73046 /* TwemojiMozilla.woff2 in Resources */,
+				2CA48681DB224A84AA3954B8 /* BootSplash.storyboard in Resources */,
+				6E832EC1276B4170BD177C54 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,7 @@
     "formik": "^2.4.6",
     "react": "19.1.0",
     "react-native": "0.80.0",
+    "react-native-bootsplash": "^6.3.9",
     "react-native-international-phone-number": "^0.9.3",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-safe-area-context": "^5.5.0",
