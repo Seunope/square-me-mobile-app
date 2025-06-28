@@ -1,9 +1,15 @@
 import React from "react";
 import { View, Text } from "react-native";
+import HomeIcon from "../assets/dashboard/bottom/home";
+import MoreIcon from "../assets/dashboard/bottom/more";
+import ProfileIcon from "../assets/dashboard/bottom/profile";
+import PaymentsIcon from "../assets/dashboard/bottom/payment";
+
 import HomeScreen from "../screens/dashboard/home/home";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { colors } from "../utils/theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,19 +40,19 @@ export default function App() {
           let iconName;
 
           if (route.name === "Home") {
-            iconName = "home";
+            iconName = <HomeIcon size={size} color={color} />;
           } else if (route.name === "Payments") {
-            iconName = "payment";
+            iconName = <PaymentsIcon size={size} color={color} />;
           } else if (route.name === "More") {
-            iconName = "more-horiz";
+            iconName = <MoreIcon size={size} color={color} />;
           } else if (route.name === "Profile") {
-            iconName = "person";
+            iconName = <ProfileIcon size={size} color={color} />;
           }
 
-          return <Icon name={iconName} size={size} color={color} />;
+          return iconName;
         },
-        tabBarActiveTintColor: "#007AFF",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: colors.blue[100],
+        tabBarInactiveTintColor: colors.gray[60],
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "white",

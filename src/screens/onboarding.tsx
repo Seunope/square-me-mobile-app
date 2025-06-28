@@ -1,20 +1,21 @@
-import React, { useState, useRef } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
   ScrollView,
   Dimensions,
   StyleSheet,
   StatusBar,
+  Image,
 } from "react-native";
 import Button from "../components/Button";
+import React, { useState, useRef } from "react";
+import { verticalScale } from "../utils/scaling";
 import { fonts, colors, sizes } from "../utils/theme";
-
+import { PageIndicatorProps } from "../utils/types";
+import { useNavigation } from "@react-navigation/native";
 const { width: screenWidth } = Dimensions.get("window");
 
-// Page Indicator Component
-const PageIndicator = ({ currentPage, totalPages }) => {
+const PageIndicator = ({ currentPage, totalPages }: PageIndicatorProps) => {
   return (
     <View style={styles.indicatorContainer}>
       {Array.from({ length: totalPages }).map((_, index) => (
@@ -32,196 +33,36 @@ const PageIndicator = ({ currentPage, totalPages }) => {
   );
 };
 
-// Mock Phone Component
-const MockPhone = ({ children, backgroundColor = "#FFFFFF" }) => {
-  return (
-    <View style={[styles.mockPhone, { backgroundColor }]}>
-      {/* Phone Notch */}
-      <View style={styles.phoneNotch} />
-
-      {/* Status Bar */}
-      <View style={styles.phoneStatusBar}>
-        <Text style={styles.phoneTime}>9:41</Text>
-        <View style={styles.phoneSignals}>
-          <Text style={styles.phoneSignal}>•••</Text>
-          <Text style={styles.phoneSignal}>📶</Text>
-          <Text style={styles.phoneSignal}>🔋</Text>
-        </View>
-      </View>
-
-      {/* Phone Content */}
-      <View style={styles.phoneContent}>{children}</View>
-    </View>
-  );
-};
-
-// Virtual Card Component (using solid color instead of gradient)
-const VirtualCard = () => {
-  return (
-    <View style={styles.virtualCard}>
-      {/* Gradient effect using overlapping views */}
-      <View style={styles.cardGradientOverlay} />
-
-      <View style={styles.cardContent}>
-        <View style={styles.cardHeader}>
-          <Text style={styles.cardLabel}>Virtual Card</Text>
-          <Text style={styles.cardBrand}>squareme</Text>
-        </View>
-
-        <Text style={styles.cardBalance}>$50000.00</Text>
-        <Text style={styles.cardHolder}>John Wayne</Text>
-
-        {/* Mastercard circles */}
-        <View style={styles.mastercardContainer}>
-          <View
-            style={[styles.mastercardCircle, { backgroundColor: "#FF5F00" }]}
-          />
-          <View
-            style={[
-              styles.mastercardCircle,
-              { backgroundColor: "#EB001B", marginLeft: -8 },
-            ]}
-          />
-        </View>
-      </View>
-    </View>
-  );
-};
-
-// Card Actions Component
-const CardActions = () => {
-  const actions = [
-    { name: "Top up card", icon: "+" },
-    { name: "Freeze card", icon: "❄️" },
-    { name: "Delete card", icon: "🗑️" },
-  ];
-
-  return (
-    <View style={styles.cardActionsContainer}>
-      {actions.map((action, index) => (
-        <View key={index} style={styles.cardAction}>
-          <View style={styles.cardActionIcon}>
-            <Text style={styles.cardActionIconText}>{action.icon}</Text>
-          </View>
-          <Text style={styles.cardActionText}>{action.name}</Text>
-        </View>
-      ))}
-    </View>
-  );
-};
-
-// Bill Categories Component
-const BillCategories = () => {
-  const categories = [
-    { name: "Airtime Recharge", icon: "📱", color: "#E6F3FF" },
-    { name: "Betting", icon: "🎲", color: "#E6FFFA" },
-    { name: "Cable Tv", icon: "📺", color: "#F3E8FF" },
-    { name: "Data Subscription", icon: "📶", color: "#E0F7FA" },
-    { name: "Utility Bills", icon: "📍", color: "#FFF3E0" },
-  ];
-
-  return (
-    <View style={styles.billCategoriesContainer}>
-      {categories.map((category, index) => (
-        <TouchableOpacity
-          key={index}
-          style={[styles.billCategory, { backgroundColor: category.color }]}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.billCategoryIcon}>{category.icon}</Text>
-          <Text style={styles.billCategoryText}>{category.name}</Text>
-          <Text style={styles.billCategoryArrow}>›</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-};
-
-// Wallet Balance Component (using solid color instead of gradient)
-const WalletBalance = () => {
-  return (
-    <View style={styles.walletBalance}>
-      {/* Gradient effect using overlapping views */}
-      <View style={styles.walletGradientOverlay} />
-
-      <View style={styles.walletContent}>
-        <Text style={styles.walletTag}>Squareme tag @davidkingcee2</Text>
-        <Text style={styles.walletLabel}>Wallet Balance ₦</Text>
-        <Text style={styles.walletAmount}>NGN 500,000.00</Text>
-        <Text style={styles.walletBank}>Providus Bank/ 1234567890 📋</Text>
-      </View>
-    </View>
-  );
-};
-
-// Quick Actions Component
-const QuickActions = () => {
-  const actions = [
-    { name: "Fund Wallet", icon: "💰", color: "#DBEAFE" },
-    { name: "Withdraw", icon: "💸", color: "#F3E8FF" },
-    { name: "Pay Bills", icon: "📄", color: "#E0F2FE" },
-    { name: "Cards", icon: "💳", color: "#F0F9FF" },
-  ];
-
-  return (
-    <View style={styles.quickActionsContainer}>
-      {actions.map((action, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.quickAction}
-          activeOpacity={0.7}
-        >
-          <View
-            style={[styles.quickActionIcon, { backgroundColor: action.color }]}
-          >
-            <Text style={styles.quickActionIconText}>{action.icon}</Text>
-          </View>
-          <Text style={styles.quickActionText}>{action.name}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-};
-
-// Transfer Notifications Component
-const TransferNotifications = () => {
-  return (
-    <>
-      <View style={[styles.transferNotification, { top: -40, left: 20 }]}>
-        <Text style={styles.transferText}>Transfer to John Williams</Text>
-        <Text style={styles.transferAmount}>₦5000</Text>
-      </View>
-      <View style={[styles.transferNotification, { top: -20, right: 20 }]}>
-        <Text style={styles.transferText}>Transfer to John Williams</Text>
-        <Text style={styles.transferAmount}>₦5000</Text>
-      </View>
-    </>
-  );
-};
-
 const OnboardingSlider = () => {
-  const [currentPage, setCurrentPage] = useState(0);
   const scrollViewRef = useRef(null);
+  const navigation = useNavigation<any>();
+  const [currentPage, setCurrentPage] = useState(0);
 
   const pages = [
+    {
+      backgroundColor: "#0891B2", // Cyan
+      title: "Spend your money easily without any complications",
+      subtitle: "Receive funds sent to you in seconds.",
+      content: (
+        <View style={styles.pageContainer}>
+          <Image
+            source={require("../assets/on-boarding/wallet-slide.png")}
+            style={styles.imageContainer}
+          />
+        </View>
+      ),
+    },
     {
       backgroundColor: "#9333EA", // Purple
       title: "A virtual USD card for your payments",
       subtitle: "Shop globally. Renew your subscriptions with ease.",
       content: (
-        <MockPhone>
-          <View style={styles.pageContent}>
-            <Text style={styles.pageHeader}>← Cards</Text>
-            <VirtualCard />
-            <CardActions />
-            <View style={styles.cardDetailsSection}>
-              <Text style={styles.cardDetailsText}>Card Details</Text>
-              <TouchableOpacity>
-                <Text style={styles.showAllText}>Show all</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </MockPhone>
+        <View style={styles.pageContainer}>
+          <Image
+            source={require("../assets/on-boarding/payment-slide.png")}
+            style={styles.imageContainer}
+          />
+        </View>
       ),
     },
     {
@@ -229,36 +70,11 @@ const OnboardingSlider = () => {
       title: "A super secure way to pay your bills",
       subtitle: "Pay your bills with the cheapest rates in town.",
       content: (
-        <MockPhone>
-          <View style={styles.pageContent}>
-            <Text style={styles.pageHeader}>← Pay Bills</Text>
-            <Text style={styles.sectionTitle}>Bill Categories</Text>
-            <BillCategories />
-          </View>
-        </MockPhone>
-      ),
-    },
-    {
-      backgroundColor: "#0891B2", // Cyan
-      title: "Spend your money easily without any complications",
-      subtitle: "Receive funds sent to you in seconds.",
-      content: (
-        <View style={styles.thirdPageContainer}>
-          <TransferNotifications />
-          <MockPhone>
-            <View style={styles.pageContent}>
-              <View style={styles.userGreeting}>
-                <View style={styles.userAvatar} />
-                <Text style={styles.greetingText}>Hi David,</Text>
-                <TouchableOpacity style={styles.notificationBell}>
-                  <Text>🔔</Text>
-                </TouchableOpacity>
-              </View>
-              <WalletBalance />
-              <Text style={styles.sectionTitle}>Quick Actions</Text>
-              <QuickActions />
-            </View>
-          </MockPhone>
+        <View style={styles.pageContainer}>
+          <Image
+            source={require("../assets/on-boarding/virtual-card.png")}
+            style={styles.imageContainer}
+          />
         </View>
       ),
     },
@@ -321,12 +137,20 @@ const OnboardingSlider = () => {
         <View style={styles.buttonSection}>
           <Button
             btnTxt="Create an account"
-            onPress={() => console.log("Create account")}
+            onPress={() =>
+              navigation.navigate("AuthStack", {
+                screen: "SignUp",
+              })
+            }
           ></Button>
           <Button
             outline={true}
             btnTxt=" I already have an account"
-            onPress={() => console.log("I already have an account")}
+            onPress={() =>
+              navigation.navigate("AuthStack", {
+                screen: "LogIn",
+              })
+            }
           ></Button>
         </View>
       </View>
@@ -338,6 +162,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
+  },
+  imageContainer: {
+    flex: 1,
+    width: verticalScale(340),
+    height: verticalScale(350),
+    // marginBottom: 24,
+  },
+  pageContainer: {
+    position: "relative",
+    alignItems: "center",
   },
   backgroundSolid: {
     position: "absolute",
@@ -374,56 +208,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
 
-  // Mock Phone Styles
-  mockPhone: {
-    width: 280,
-    height: 520,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 25,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.15,
-    shadowRadius: 16,
-    elevation: 8,
-    overflow: "hidden",
-  },
-  phoneNotch: {
-    position: "absolute",
-    top: 8,
-    left: "50%",
-    marginLeft: -60,
-    width: 120,
-    height: 24,
-    backgroundColor: "#000000",
-    borderRadius: 12,
-    zIndex: 10,
-  },
-  phoneStatusBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 8,
-  },
-  phoneTime: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#000000",
-  },
-  phoneSignals: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  phoneSignal: {
-    marginLeft: 4,
-    fontSize: 12,
-  },
-  phoneContent: {
-    flex: 1,
-    paddingHorizontal: 16,
-  },
-
   // Page Content Styles
   pageContent: {
     flex: 1,
@@ -434,264 +218,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#000000",
     marginBottom: 20,
-  },
-
-  // Virtual Card Styles (simulating gradient with layers)
-  virtualCard: {
-    width: "100%",
-    height: 140,
-    borderRadius: 12,
-    marginBottom: 24,
-    position: "relative",
-    backgroundColor: "#7C3AED",
-    overflow: "hidden",
-  },
-  cardGradientOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(156, 63, 209, 0.3)",
-  },
-  cardContent: {
-    flex: 1,
-    padding: 16,
-    position: "relative",
-    zIndex: 1,
-  },
-  cardHeader: {
-    marginBottom: 8,
-  },
-  cardLabel: {
-    color: "#FFFFFF",
-    fontSize: 10,
-    opacity: 0.8,
-  },
-  cardBrand: {
-    color: "#FFFFFF",
-    fontSize: 10,
-    opacity: 0.8,
-    marginTop: 2,
-  },
-  cardBalance: {
-    color: "#FFFFFF",
-    fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 16,
-  },
-  cardHolder: {
-    color: "#FFFFFF",
-    fontSize: 8,
-    opacity: 0.8,
-    position: "absolute",
-    bottom: 16,
-    left: 16,
-  },
-  mastercardContainer: {
-    position: "absolute",
-    right: 16,
-    top: 16,
-    flexDirection: "row",
-  },
-  mastercardCircle: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    opacity: 0.8,
-  },
-
-  // Card Actions Styles
-  cardActionsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginBottom: 24,
-  },
-  cardAction: {
-    alignItems: "center",
-  },
-  cardActionIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "#F5F5F5",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  cardActionIconText: {
-    fontSize: 16,
-  },
-  cardActionText: {
-    fontSize: 12,
-    color: "#666666",
-    textAlign: "center",
-  },
-
-  // Card Details Section
-  cardDetailsSection: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  cardDetailsText: {
-    fontSize: 14,
-    color: "#000000",
-  },
-  showAllText: {
-    fontSize: 12,
-    color: "#6B7280",
-  },
-
-  // Bill Categories Styles
-  sectionTitle: {
-    fontSize: 14,
-    color: "#666666",
-    marginBottom: 16,
-  },
-  billCategoriesContainer: {
-    width: "100%",
-  },
-  billCategory: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  billCategoryIcon: {
-    fontSize: 16,
-    marginRight: 12,
-  },
-  billCategoryText: {
-    flex: 1,
-    fontSize: 14,
-    color: "#000000",
-  },
-  billCategoryArrow: {
-    fontSize: 16,
-    color: "#999999",
-  },
-
-  // Wallet Balance Styles (simulating gradient with layers)
-  walletBalance: {
-    width: "100%",
-    borderRadius: 12,
-    marginBottom: 24,
-    position: "relative",
-    backgroundColor: "#1E40AF",
-    overflow: "hidden",
-  },
-  walletGradientOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(59, 130, 246, 0.3)",
-  },
-  walletContent: {
-    padding: 16,
-    position: "relative",
-    zIndex: 1,
-  },
-  walletTag: {
-    color: "#FFFFFF",
-    fontSize: 10,
-    opacity: 0.8,
-    marginBottom: 8,
-  },
-  walletLabel: {
-    color: "#FFFFFF",
-    fontSize: 10,
-    opacity: 0.8,
-    marginBottom: 4,
-  },
-  walletAmount: {
-    color: "#FFFFFF",
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  walletBank: {
-    color: "#FFFFFF",
-    fontSize: 8,
-    opacity: 0.8,
-  },
-
-  // Quick Actions Styles
-  quickActionsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-  },
-  quickAction: {
-    alignItems: "center",
-  },
-  quickActionIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  quickActionIconText: {
-    fontSize: 16,
-  },
-  quickActionText: {
-    fontSize: 10,
-    color: "#666666",
-    textAlign: "center",
-  },
-
-  // User Greeting Styles
-  userGreeting: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 24,
-  },
-  userAvatar: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "#D1D5DB",
-    marginRight: 8,
-  },
-  greetingText: {
-    flex: 1,
-    fontSize: 14,
-    color: "#000000",
-  },
-  notificationBell: {
-    padding: 4,
-  },
-
-  // Transfer Notifications Styles
-  thirdPageContainer: {
-    position: "relative",
-    alignItems: "center",
-  },
-  transferNotification: {
-    position: "absolute",
-    width: 120,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 8,
-    padding: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    zIndex: 10,
-  },
-  transferText: {
-    fontSize: 8,
-    color: "#000000",
-  },
-  transferAmount: {
-    fontSize: 8,
-    color: "#666666",
   },
 
   // Bottom Section Styles
