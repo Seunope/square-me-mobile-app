@@ -24,6 +24,15 @@ A React Native mobile app built as part of a take-home technical interview. This
 
 ## 🚀 Getting Started
 
+# Screenshots
+
+### 🔐 Onboarding Screen
+![App Onboarding Screenshot](./src/assets/readme/on-board.png)
+
+### 🏠 Dashboard
+<img src="./src/assets/readme/dashboard.png" width="400" alt="Dashboard Screenshot" />
+
+
 ### 🔧 Prerequisites
 
 - [Node.js](https://nodejs.org/) ≥ 18.x
