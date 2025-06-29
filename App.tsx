@@ -1,21 +1,37 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { Provider } from "react-redux";
+import RootNavigation from "./src/route/root";
+import { store } from "./src/utils/redux/store";
+import React, { useEffect, useState } from "react";
+import AppStorage from "./src/utils/services/AppStorage";
+import { StyleSheet, Text, useColorScheme } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { sizes } from "./src/utils/theme";
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === "dark";
+  const [isLogin, setIsLogin] = useState<boolean | null>(null);
+  const [userRoute, setUserRoute] = useState(null);
+
+  useEffect(() => {
+    initBoot();
+  }, []);
+
+  const initBoot = async () => {
+    const val = await AppStorage.getToken();
+    const userRole = await AppStorage.getData("role");
+    setIsLogin(false);
+  };
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <SafeAreaProvider>
+      <Provider store={store}>
+        {isLogin !== null ? (
+          <RootNavigation isLogin={isLogin} userRoute={userRoute} />
+        ) : (
+          <Text>Error occurred....</Text>
+        )}
+      </Provider>
+    </SafeAreaProvider>
   );
 }
 
