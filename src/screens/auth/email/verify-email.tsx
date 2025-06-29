@@ -1,29 +1,18 @@
-import PhoneInput, {
-  isValidPhoneNumber,
-} from "react-native-international-phone-number";
-import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   Keyboard,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import HelpCircleIcon from "../../../assets/auth/help-circle";
-import StarIcon from "../../../assets/auth/star";
-import { colors, fonts, sizes } from "../../../utils/theme";
-import InputBar from "../../../components/InputBar";
 import Button from "../../../components/Button";
-import BackArrowIcon from "../../../assets/common/back-arrow";
-import KiteIcon from "../../../assets/auth/kite";
-import { useNavigation } from "@react-navigation/native";
-import SmoothPinCodeInput from "@zfloc/react-native-smooth-pincode-input";
+import React, { useState, useEffect } from "react";
 import { moderateScale } from "../../../utils/scaling";
+import { useNavigation } from "@react-navigation/native";
+import { colors, fonts, sizes } from "../../../utils/theme";
+import BackArrowIcon from "../../../assets/common/back-arrow";
+import SmoothPinCodeInput from "@zfloc/react-native-smooth-pincode-input";
 
 export const PhoneVerificationScreen = () => {
   const navigation = useNavigation<any>();
