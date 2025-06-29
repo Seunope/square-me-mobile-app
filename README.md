@@ -38,7 +38,7 @@ yarn install # or npm install
 ```  
 
 ### ▶️ Running the App
-yarn android
+```yarn android```
 
 ### 🏗️ Architecture Choices
 
@@ -66,11 +66,7 @@ yarn android
 
     ❌ API not connected to real/mock server
 
-    ❌ No form validation yet (intended: Yup or Zod)
-
     ❌ Minimal error handling & no toast/feedback alerts
-
-    ❌ UI not yet optimized for all screen sizes
 
     ❌ No test coverage included
 
