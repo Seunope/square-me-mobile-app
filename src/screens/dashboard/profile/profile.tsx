@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 // import { Ionicons } from "@expo/vector-icons";
 import AccountIcon from "../../../assets/profile/account";
@@ -72,6 +73,7 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}

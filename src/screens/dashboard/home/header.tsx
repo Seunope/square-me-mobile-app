@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 16,
+    marginTop: sizes.md,
+    paddingVertical: sizes.md,
   },
   leftSection: {
     flexDirection: "row",

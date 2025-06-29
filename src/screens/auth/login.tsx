@@ -6,9 +6,8 @@ import {
   StatusBar,
   Keyboard,
 } from "react-native";
-import React, { useState } from "react";
 import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { useState } from "react";
 import StarIcon from "../../assets/auth/star";
 import { LogInSchema } from "../../utils/schema";
 import Button from "../../components/DynamicButton";
