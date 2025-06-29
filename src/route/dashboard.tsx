@@ -6,6 +6,7 @@ import ProfileIcon from "../assets/dashboard/bottom/profile";
 import PaymentsIcon from "../assets/dashboard/bottom/payment";
 
 import HomeScreen from "../screens/dashboard/home/home";
+import ProfileScreen from "../screens/dashboard/profile/profile";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -23,12 +24,6 @@ const PaymentsScreen = () => (
 const MoreScreen = () => (
   <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
     <Text>More Screen</Text>
-  </View>
-);
-
-const ProfileScreen = () => (
-  <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text>Profile Screen</Text>
   </View>
 );
 

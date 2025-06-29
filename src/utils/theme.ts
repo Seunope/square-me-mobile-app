@@ -33,6 +33,7 @@ export const colors = {
   },
   green: {
     100: "#039855",
+    90: "#12B76A",
   },
 
   red: {
