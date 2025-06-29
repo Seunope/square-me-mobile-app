@@ -2,13 +2,10 @@ import React from "react";
 import { View, Text } from "react-native";
 import HomeIcon from "../assets/dashboard/bottom/home";
 import MoreIcon from "../assets/dashboard/bottom/more";
+import HomeScreen from "../screens/dashboard/home/home";
 import ProfileIcon from "../assets/dashboard/bottom/profile";
 import PaymentsIcon from "../assets/dashboard/bottom/payment";
-
-import HomeScreen from "../screens/dashboard/home/home";
 import ProfileScreen from "../screens/dashboard/profile/profile";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colors } from "../utils/theme";
 

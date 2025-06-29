@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import AppStorage from "./src/utils/services/AppStorage";
 import { StyleSheet, Text, useColorScheme } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { sizes } from "./src/utils/theme";
 
 function App() {
   const isDarkMode = useColorScheme() === "dark";

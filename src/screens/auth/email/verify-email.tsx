@@ -109,7 +109,8 @@ export const PhoneVerificationScreen = () => {
               screen: "SuccessScreen",
               params: {
                 details: {
-                  nextScreen: "",
+                  // goToDashboard: true,
+                  nextScreen: "LogIn",
                   message: "Your email address has been added successfully.",
                   title: "Email added successfully!",
                 },
@@ -125,6 +126,7 @@ export default PhoneVerificationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: sizes.md,
     backgroundColor: "#fff",
   },
   header: {

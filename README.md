@@ -22,8 +22,6 @@ A React Native mobile app built as part of a take-home technical interview. This
 
 ---
 
-## 🚀 Getting Started
-
 # Screenshots
 
 ### 🔐 Onboarding Screen
@@ -32,6 +30,8 @@ A React Native mobile app built as part of a take-home technical interview. This
 ### 🏠 Dashboard
 <img src="./src/assets/readme/dashboard.png" width="400" alt="Dashboard Screenshot" />
 
+
+## 🚀 Getting Started
 
 ### 🔧 Prerequisites
 

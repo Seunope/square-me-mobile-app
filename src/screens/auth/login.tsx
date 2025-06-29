@@ -122,6 +122,7 @@ export default LogIn;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: sizes.md,
     backgroundColor: colors.white[100],
   },
   header: {

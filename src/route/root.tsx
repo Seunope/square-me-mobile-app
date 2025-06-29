@@ -1,7 +1,6 @@
 import React from "react";
 import AuthStack from "./auth";
 import DashboardTab from "./dashboard";
-// import MoreStack from "./more";
 import Onboarding from "../screens/onboarding";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStaticNavigation } from "@react-navigation/native";
@@ -45,64 +44,6 @@ const RootStackScreen = ({ ...props }) => {
           headerShown: false,
         }}
       />
-      {/* <RootStack.Screen
-        name="MoreStack"
-        component={MoreStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <RootStack.Screen
-        name="OrderStack"
-        component={OrderStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <RootStack.Screen
-        name="DashboardTab"
-        component={DashboardTab}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <RootStack.Screen
-        name="DashboardTabWholeSaler"
-        component={DashboardTabWholeSaler}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <RootStack.Screen
-        name="WholeSaleOrderStack"
-        component={WholeSaleOrderStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <RootStack.Screen
-        name="DriverOrderStack"
-        component={DriverOrderStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <RootStack.Screen
-        name="DashboardCAA"
-        component={DashboardCAA}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <RootStack.Screen
-        name="DashboardDiver"
-        component={DashboardDiver}
-        options={{
-          headerShown: false,
-        }}
-      /> */}
     </RootStack.Navigator>
   );
 };

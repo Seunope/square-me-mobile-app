@@ -11,6 +11,10 @@ export const SuccessScreen = () => {
   const details = route.params?.details;
 
   const doSubmit = async () => {
+    // console.log("details", details);
+    // if (details?.goToDashboard) {
+    //   navigation.navigate("DashboardTab");
+    // }
     navigation.reset({
       index: 0,
       routes: [{ name: "AuthStack" }],

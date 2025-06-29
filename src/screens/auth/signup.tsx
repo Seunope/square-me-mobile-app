@@ -128,6 +128,7 @@ export default SignUp;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: sizes.md,
     backgroundColor: "#fff",
   },
   header: {
